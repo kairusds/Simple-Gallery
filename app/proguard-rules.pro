@@ -21,3 +21,11 @@ native <methods>;
 
 # Reprint
 -keep class com.github.ajalt.reprint.module.** { *; }
+
+# Google VR SDK
+-dontwarn com.google.protobuf.nano.ExtendableMessageNano
+-dontwarn com.google.protobuf.nano.FieldArray
+-dontwarn com.google.protobuf.nano.InternalNano
+-dontwarn com.google.protobuf.nano.InvalidProtocolBufferNanoException
+-dontwarn com.google.protobuf.nano.MessageNano
+-dontwarn com.google.protobuf.nano.WireFormatNano
