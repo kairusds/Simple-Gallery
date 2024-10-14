@@ -48,7 +48,7 @@ android {
     buildTypes {
         debug {
             // we cannot change the original package name, else PhotoEditorSDK won't work
-            //applicationIdSuffix = ".debug"
+            applicationIdSuffix = ".debug"
         }
         release {
             isMinifyEnabled = true
@@ -73,6 +73,15 @@ android {
         getByName("main").java.srcDirs("src/main/kotlin")
         if (isProprietary) {
             getByName("main").java.srcDirs("src/proprietary/kotlin")
+        }
+    }
+
+    splits {
+        abi {
+            isEnable = true
+            reset()
+            include("armeabi-v7a", "arm64-v8a", "x86", "x86_64")
+            isUniversalApk = true
         }
     }
 
@@ -107,10 +116,13 @@ dependencies {
     implementation(libs.android.gif.drawable)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.androidx.media3.exoplayer)
-    implementation(libs.sdk.panowidget)
-    implementation(libs.sdk.videowidget)
     implementation(libs.sanselan)
-    implementation(libs.imagefilters)
+    implementation(files("libs/imagefilters.aar"))
+    implementation(files("libs/sdk-base-1.180.0.aar"))
+    implementation(files("libs/sdk-common-1.180.0.aar"))
+    implementation(files("libs/sdk-commonwidget-1.180.0.aar"))
+    implementation(files("libs/sdk-panowidget-1.180.0.aar"))
+    implementation(files("libs/sdk-videowidget-1.180.0.aar"))
     implementation(libs.androidsvg.aar)
     implementation(libs.gestureviews)
     implementation(libs.subsamplingscaleimageview)
@@ -118,6 +130,7 @@ dependencies {
     implementation(libs.awebp)
     implementation(libs.apng)
     implementation(libs.okio)
+    implementation("com.github.bumptech.glide:avif-integration:4.16.0")
     implementation(libs.picasso) {
         exclude(group = "com.squareup.okhttp3", module = "okhttp")
     }
